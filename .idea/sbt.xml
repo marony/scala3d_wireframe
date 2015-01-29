@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaSbtSettings">
+    <option name="customLauncherEnabled" value="true" />
+    <option name="customLauncherPath" value="C:\Users\tada\bin\sbt-launch.jar" />
+    <option name="customVMEnabled" value="true" />
+    <option name="customVMPath" value="C:\Program Files\Java\jdk1.8.0_25" />
+    <option name="linkedExternalProjectsSettings">
+      <SbtProjectSettings>
+        <option name="createEmptyContentRootDirectories" value="true" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="jdk" value="1.8_win" />
+        <option name="resolveClassifiers" value="true" />
+        <option name="resolveSbtClassifiers" value="true" />
+      </SbtProjectSettings>
+    </option>
+  </component>
+</project>
