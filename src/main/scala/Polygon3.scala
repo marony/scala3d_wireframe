@@ -13,7 +13,8 @@ import scala.math.{cos, sin}
 
 case class Polygon3(p1 : Point3, p2 : Point3, p3 : Point3) {
   // 描画
-  def draw(g : Graphics2D) {
+  def draw(g : Graphics2D, color : Color) {
+    // 描画座標
     // xp = x, yp = y
     val xp1 = p1.x
     val yp1 = p1.y
@@ -21,8 +22,8 @@ case class Polygon3(p1 : Point3, p2 : Point3, p3 : Point3) {
     val yp2 = p2.y
     val xp3 = p3.x
     val yp3 = p3.y
-    // 麺
-    g.setColor(new Color(0, 20, 120))
+    // 面
+    g.setColor(color)
     g.fill(
       new Polygon(
         Array[Int](p1.x.asInstanceOf[Int], p2.x.asInstanceOf[Int], p3.x.asInstanceOf[Int]),

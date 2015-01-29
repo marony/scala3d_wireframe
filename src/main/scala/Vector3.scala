@@ -15,6 +15,7 @@ object Vector3 {
 }
 
 case class Vector3(x : Double, y : Double, z : Double) {
+  // ベクトルの大きさを取得
   def length = {
     sqrt(x * x + y * y + z * z)
   }

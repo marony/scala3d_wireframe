@@ -21,4 +21,8 @@ case class Point3(x : Double, y : Double, z : Double) {
   def -(vector : Vector3) : Point3 = {
     Point3(x - vector.x, y - vector.y, z - vector.z)
   }
+  // 点と点の差
+  def -(point : Point3) : Point3 = {
+    Point3(x - point.x, y - point.y, z - point.z)
+  }
 }

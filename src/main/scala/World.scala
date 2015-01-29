@@ -17,7 +17,9 @@ case class World() {
   val SCALE = 80.0
 
   // カメラ
-  val camera = Camera(Point3(0, 0, 5), Vector3(0, 0, 1), 10.0)
+  val camera = Camera(Point3(0, 0, 5), Vector3(0, 0, 1), 10)
+  // 光源
+  val light = Light(Point3(-5, -3, 10))
 
   // 物体を定義するポリゴン
   val polygons = List(
@@ -76,16 +78,21 @@ case class World() {
     g.setColor(color)
     // ポリゴン群を投影面の座標に変換
     rotate = rotate % 360
-    polygons.map(_.rotateX(20d / 360 * 2 * Pi).
-      // 回転
-      rotateY(rotate.asInstanceOf[Double] / 360 * 2 * Pi)).
+    polygons.
+        map(_.rotateX(20d / 360 * 2 * Pi).
+              // 回転
+              rotateY(rotate.asInstanceOf[Double] / 360 * 2 * Pi)).
       // 隠面消去
-      filter((p) => p.normal <*> camera.direction <= 0).
+      filter(_.normal <*> camera.direction <= 0).
       // 奥からソート
       sortBy((p) => -1.0 * (p.p1.z + p.p2.z + p.p3.z)).
+      // 拡散高の計算
+      map((p) => (p, light.getColor(new Color(0, 80, 255), p))).
       // ビューに合わせる
-      map(convertToView).
+      map { case (p, c) => (convertToView(p), c)}.
       // 描画
-      foreach(_.draw(g))
+      foreach { case (p, c) => {
+        p.draw(g, c)
+      }}
   }
 }

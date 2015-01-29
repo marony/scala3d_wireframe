@@ -2,6 +2,6 @@
 
 　ScalaでSwingと3Dのロジックのテストです。
 
-![動画](/resources/Video_2015-01-29_104554_1.gif)
+![動画](/resources/Video_2015-01-30_010352.gif)
 
-![静止画](/resources/2015-01-29_104515.png)
+![静止画](/resources/2015-01-30_010724.png)
