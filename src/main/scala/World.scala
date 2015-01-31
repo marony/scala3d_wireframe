@@ -19,7 +19,7 @@ case class World() {
   // カメラ
   val camera = Camera(Point3(0, 0, 5), Vector3(0, 0, 1), 10)
   // 光源
-  val light = Light(Point3(-5, -3, 10))
+  val light = Light(Point3(-5, 3, -10))
 
   // 物体を定義するポリゴン
   val polygons = List(
@@ -86,7 +86,7 @@ case class World() {
       filter(_.normal <*> camera.direction <= 0).
       // 奥からソート
       sortBy((p) => -1.0 * (p.p1.z + p.p2.z + p.p3.z)).
-      // 拡散高の計算
+      // 拡散光の計算
       map((p) => (p, light.getColor(new Color(0, 80, 255), p))).
       // ビューに合わせる
       map { case (p, c) => (convertToView(p), c)}.

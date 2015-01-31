@@ -8,15 +8,13 @@ case class Light(position : Point3) {
     // 拡散光の計算(ランバードの余弦則)
     // TODO: 計算おかしい？
     val L = (position - polygon3.p1).toUnitVector
-    val cosa = L <*> polygon3.normal.toUnitVector * -1.0
-    println(s"L = $L, cosa = $cosa, position = $position, polygon3 = $polygon3")
-    var R = (color.getRed * cosa * 0.8 + 0.2).asInstanceOf[Int]
-    var G = (color.getGreen * cosa * 0.8 + 0.2).asInstanceOf[Int]
-    var B = (color.getBlue * cosa * 0.8 + 0.2).asInstanceOf[Int]
-    R = Math.min(255, Math.max(0, R))
-    G = Math.min(255, Math.max(0, G))
-    B = Math.min(255, Math.max(0, B))
-    println(s"color = $color, R = $R, G = $G, B = $B")
+    val cosa = L <*> polygon3.normal.toUnitVector
+    var R = (color.getRed * (if (cosa >= 0) cosa * 0.9 else 0.0) + 0.1).asInstanceOf[Int]
+    var G = (color.getGreen * (if (cosa >= 0) cosa * 0.9 else 0.0) + 0.1).asInstanceOf[Int]
+    var B = (color.getBlue * (if (cosa >= 0) cosa * 0.9 else 0.0) + 0.1).asInstanceOf[Int]
+    R = Math.min(255, Math.max((255.0 * 0.1).asInstanceOf[Int], R))
+    G = Math.min(255, Math.max((255.0 * 0.1).asInstanceOf[Int], G))
+    B = Math.min(255, Math.max((255.0 * 0.1).asInstanceOf[Int], B))
     new Color(R, G, B)
   }
 }
