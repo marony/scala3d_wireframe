@@ -29,10 +29,12 @@ case class Polygon3(p1 : Point3, p2 : Point3, p3 : Point3) {
         Array[Int](p1.x.asInstanceOf[Int], p2.x.asInstanceOf[Int], p3.x.asInstanceOf[Int]),
         Array[Int](p1.y.asInstanceOf[Int], p2.y.asInstanceOf[Int], p3.y.asInstanceOf[Int]), 3))
     // ワイヤー
+/*
     g.setColor(Color.white)
     g.drawLine(xp1.asInstanceOf[Int], yp1.asInstanceOf[Int], xp2.asInstanceOf[Int], yp2.asInstanceOf[Int])
     g.drawLine(xp2.asInstanceOf[Int], yp2.asInstanceOf[Int], xp3.asInstanceOf[Int], yp3.asInstanceOf[Int])
     g.drawLine(xp3.asInstanceOf[Int], yp3.asInstanceOf[Int], xp1.asInstanceOf[Int], yp1.asInstanceOf[Int])
+*/
   }
 
   // 法線ベクトル

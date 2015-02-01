@@ -9,41 +9,17 @@
 import java.awt.{Color, Graphics2D}
 import scala.math.{Pi}
 
-case class World() {
+case class World(polygons : Array[Polygon3]) {
   var rotate : Int = 0
 
   val WIDTH = 640
   val HEIGHT = 480
-  val SCALE = 80.0
+  val SCALE = 2.0
 
   // カメラ
-  val camera = Camera(Point3(0, 0, 5), Vector3(0, 0, 1), 10)
+  val camera = Camera(Point3(0, 30, 100), Vector3(0, 0, 100), 100)
   // 光源
-  val light = Light(Point3(-5, 3, -10))
-
-  // 物体を定義するポリゴン
-  val polygons = List(
-    // ↓のモデルをそのまま頂いた
-    // http://codezine.jp/article/detail/38
-    // 0 p1, p4, p2
-    Polygon3(Point3(0, 1, 0), Point3(0, 0, 1), Point3(0, 0, -1)),
-    // 3 p2, p4, p3
-    Polygon3(Point3(0, 0, -1), Point3(0, 0, 1), Point3(1, 0, 0)),
-    // 5 p4, p5, p3
-    Polygon3(Point3(0, 0, 1), Point3(0, -1, 0), Point3(1, 0, 0)),
-    // 6 p3, p5, p2
-    Polygon3(Point3(1, 0, 0), Point3(0, -1, 0), Point3(0, 0, -1)),
-    // 4 p0, p5, p4
-    Polygon3(Point3(-1, 0, 0), Point3(0, -1, 0), Point3(0, 0, 1)),
-    // 7 p5, p0, p2
-    Polygon3(Point3(0, -1, 0), Point3(-1, 0, 0), Point3(0, 0, -1)),
-    // 1 p1, p0, p4
-    Polygon3(Point3(0, 1, 0), Point3(-1, 0, 0), Point3(0, 0, 1)),
-    // 2 p1, p2, p0
-    Polygon3(Point3(0, 1, 0), Point3(0, 0, -1), Point3(-1, 0, 0)),
-    // 4 p0, p5, p4
-    Polygon3(Point3(-1, 0, 0), Point3(0, -1, 0), Point3(0, 0, 1))
-  )
+  val light = Light(Point3(-500, 300, -1000))
 
   def convertToViewPort(point : Point3) : Point3 = {
     // 投影面をディスプレイに合わせる
