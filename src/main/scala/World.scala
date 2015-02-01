@@ -14,12 +14,12 @@ case class World(polygons : Array[Polygon3]) {
 
   val WIDTH = 640
   val HEIGHT = 480
-  val SCALE = 2.0
+  val SCALE = 1.5
 
   // カメラ
-  val camera = Camera(Point3(0, 30, 100), Vector3(0, 0, 100), 100)
+  val camera = Camera(Point3(0, 30, -100), Vector3(0, 0, 100), 200)
   // 光源
-  val light = Light(Point3(-500, 300, -1000))
+  val light = Light(Point3(-500, 300, -700))
 
   def convertToViewPort(point : Point3) : Point3 = {
     // 投影面をディスプレイに合わせる
@@ -32,10 +32,12 @@ case class World(polygons : Array[Polygon3]) {
   def convertToView(point : Point3) : Point3 = {
     // 点を投影面の座標に合わせる
     // TODO: 投影おかしい？
+    // x' = x * (z0 / z0 - z) = x / (1 - z / z0)
+    // y' = x * (y0 / y0 - z) = y / (1 - y / z0)
     // カメラの位置の逆に移動
     convertToViewPort(Point3(
-      (point.x - camera.position.x) / ((1.0 - point.z - camera.position.z) / camera.distance),
-      (point.y - camera.position.y) / ((1.0 - point.z - camera.position.z) / camera.distance),
+      (point.x - camera.position.x) / ((1.0 - (point.z - camera.position.z)) / camera.distance),
+      (point.y - camera.position.y) / ((1.0 - (point.z - camera.position.z)) / camera.distance),
       camera.distance
     ))
   }

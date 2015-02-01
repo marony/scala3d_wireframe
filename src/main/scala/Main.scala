@@ -18,7 +18,7 @@ object Main  extends SimpleSwingApplication {
     // Windowのタイトル
     title = "Window Title"
     contents = new Panel {
-      // 初期データ読み込み
+      // 初期データ(objファイル)読み込み
       // 頂点のデータ
       val regex1 = """^v +([-0-9.]+) +([-0-9.]+) +([-0-9.]+)""".r
       val points = Source.fromFile("teapot.obj").getLines.
