@@ -50,9 +50,9 @@ object Main  extends SimpleSwingApplication {
       val world = World(polygons)
       preferredSize = new Dimension(world.WIDTH, world.HEIGHT)
 
-      def timer = new Timer(200, new ActionListener {
+      def timer = new Timer(50, new ActionListener {
         def actionPerformed(e: ActionEvent) {
-          world.rotate = world.rotate + 10
+          world.rotate = world.rotate + 3
           repaint()
         }
       })
