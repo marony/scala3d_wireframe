@@ -31,7 +31,6 @@ case class World(polygons : Array[Polygon3]) {
   }
   def convertToView(point : Point3) : Point3 = {
     // 点を投影面の座標に合わせる
-    // TODO: 投影おかしい？
     // x' = x * (z0 / z0 - z) = x / (1 - z / z0)
     // y' = x * (y0 / y0 - z) = y / (1 - y / z0)
     // カメラの位置の逆に移動
