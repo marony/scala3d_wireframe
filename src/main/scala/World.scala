@@ -14,10 +14,10 @@ case class World(polygons : Array[Polygon3]) {
 
   val WIDTH = 640
   val HEIGHT = 480
-  val SCALE = 1.5
+  val SCALE = 1
 
   // カメラ
-  val camera = Camera(Point3(0, -10, -100), Vector3(0, 0, 100), 200)
+  val camera = Camera(Point3(0, -10, -100), Vector3(0, 0, 1), 300)
   // 光源
   val light = Light(Point3(-500, 300, -700))
 
@@ -39,6 +39,12 @@ case class World(polygons : Array[Polygon3]) {
       (point.y - camera.position.y) / ((1.0 - (point.z - camera.position.z)) / camera.distance),
       camera.distance
     ))
+//    // http://codezine.jp/article/detail/234?p=2
+//    convertToViewPort(Point3(
+//      (camera.distance * 2) / WIDTH * point.x,
+//      (camera.distance * 2) / HEIGHT * point.y,
+//      1
+//    ))
   }
 
   def convertToView(polygon : Polygon3) : Polygon3 = {
