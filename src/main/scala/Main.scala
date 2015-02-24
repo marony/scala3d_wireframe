@@ -17,6 +17,8 @@ object Main  extends SimpleSwingApplication {
     title = "Window Title"
     contents = new Panel {
       val polygons = Util.objToPolygons("teapot.obj")
+//      val polygons = Util.objToPolygons("human.obj")
+      println(polygons.length)
       // Windowのサイズ
       val world = World(polygons)
       preferredSize = new Dimension(world.WIDTH, world.HEIGHT)
