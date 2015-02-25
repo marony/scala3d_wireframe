@@ -9,8 +9,8 @@
         <option name="jdk" value="1.8" />
         <option name="modules">
           <set>
-            <option value="/mnt/hgfs/tada/projects/_home/Scala/scala3d_wireframe" />
-            <option value="/mnt/hgfs/tada/projects/_home/Scala/scala3d_wireframe/project" />
+            <option value="$USER_HOME$/Dropbox/projects/_home/Scala/scala3d_wireframe" />
+            <option value="$USER_HOME$/Dropbox/projects/_home/Scala/scala3d_wireframe/project" />
           </set>
         </option>
         <option name="resolveClassifiers" value="true" />

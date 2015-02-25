@@ -20,7 +20,7 @@ case class Vector3(x : Double, y : Double, z : Double) {
     sqrt(x * x + y * y + z * z)
   }
   // 単位ベクトルを取得
-  def toUnitVector = {
+  def normalize = {
     Vector3(x / length, y / length, z / length)
   }
   // 加算

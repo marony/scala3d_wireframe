@@ -42,6 +42,11 @@ case class Polygon3(p1 : Point3, p2 : Point3, p3 : Point3) {
     (Point3.point3ToVector3(p2) - p1) * (Point3.point3ToVector3(p3) - p1)
   }
 
+  // アフィン変換
+  def affin(matrix : Matrix4) : Polygon3 = {
+    Polygon3(matrix * p1, matrix * p2, matrix * p3)
+  }
+
   // 移動
   // | 1 | 0 | 0 | tx |
   // | 0 | 1 | 0 | ty |
@@ -55,7 +60,7 @@ case class Polygon3(p1 : Point3, p2 : Point3, p3 : Point3) {
       0, 0, 1, vector.z,
       0, 0, 0, 1
     )
-    Polygon3(matrix * p1, matrix * p2, matrix * p3)
+    affin(matrix)
   }
   // 拡大・縮小、反転
   // | sx | 0  | 0  | 0 |
@@ -69,7 +74,7 @@ case class Polygon3(p1 : Point3, p2 : Point3, p3 : Point3) {
       0, 0, vector.z, 0,
       0, 0, 0, 1
     )
-    Polygon3(matrix * p1, matrix * p2, matrix * p3)
+    affin(matrix)
   }
   // X軸周りに回転
   // | 1 | 0     | 0      | 0 |
@@ -83,7 +88,7 @@ case class Polygon3(p1 : Point3, p2 : Point3, p3 : Point3) {
       0, sin(r), cos(r), 0,
       0, 0, 0, 1
     )
-    Polygon3(matrix * p1, matrix * p2, matrix * p3)
+    affin(matrix)
   }
   // Y軸周りに回転
   // | cos r  | 0 | sin r | 0 |
@@ -97,7 +102,7 @@ case class Polygon3(p1 : Point3, p2 : Point3, p3 : Point3) {
       -sin(r), 0, cos(r), 0,
       0, 0, 0, 1
     )
-    Polygon3(matrix * p1, matrix * p2, matrix * p3)
+    affin(matrix)
   }
   // Z軸周りに回転
   // | cos r | -sin r | 0 | 0 |
@@ -111,6 +116,6 @@ case class Polygon3(p1 : Point3, p2 : Point3, p3 : Point3) {
       0, 0, 1, 0,
       0, 0, 0, 1
     )
-    Polygon3(matrix * p1, matrix * p2, matrix * p3)
+    affin(matrix)
   }
 }
