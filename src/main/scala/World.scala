@@ -15,31 +15,18 @@ case class World(polygons : Array[(Polygon3, Color)]) {
   val WIDTH = 640
   val HEIGHT = 480
   // TODO: 読み込みの際にモデルの大きさを合わせる
-  val SCALE = 15
-//  val SCALE = 200
+//  val SCALE = 15
+  val SCALE = 3000
+//  val SCALE = 4000
 
+  // スクリーン(画面)
+  val screen = Screen(Size(WIDTH, HEIGHT), SCALE)
   // カメラ
-  val camera = Camera(Point3(-30, -10, -30), Vector3(0, 0, 0), Vector3(0, 1, 0))
+//  val camera = Camera(Point3(-30, -10, -30), Vector3(0, 0, 0), Vector3(0, 1, 0))
+  val camera = Camera(Point3(0, 0, -5), Vector3(0, 0, 0), Vector3(0, 1, 0), 1.0, 100.0)
+//  val camera = Camera(Point3(0, 0, -5), Vector3(0, 0, 0), Vector3(0, 1, 0))
   // 光源
   val light = Light(Point3(-500, 500, -500))
-
-  def convertToScreen(point : Point3) : Point3 = {
-    // 投影面をディスプレイに合わせる
-    Point3(
-      WIDTH / 2 + point.x * SCALE,
-      HEIGHT / 2 + point.y * SCALE,
-      point.z
-    )
-  }
-
-  def convertToScreen(polygon : Polygon3) : Polygon3 = {
-    // ポリゴンを投影面の座標に合わせる
-    Polygon3(
-      convertToScreen(polygon.p1),
-      convertToScreen(polygon.p2),
-      convertToScreen(polygon.p3)
-    )
-  }
 
   def draw(g : Graphics2D) : Unit = {
     val color = new Color(255, 255, 255)
@@ -59,9 +46,9 @@ case class World(polygons : Array[(Polygon3, Color)]) {
       // 奥からソート
       sortBy((pc) => -1.0 * (pc._1.p1.z + pc._1.p2.z + pc._1.p3.z)).
       // 射影変換
-      map { case (p, c) => (camera.projection(p, WIDTH, HEIGHT), c)}.
+      map { case (p, c) => (camera.projection(p, screen), c)}.
       // スクリーン変換
-      map { case (p, c) => (convertToScreen(p), c)}.
+      map { case (p, c) => (screen.convertToScreen(p), c)}.
       // 描画
       foreach { case (p, c) => {
         p.draw(g, c)

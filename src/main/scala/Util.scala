@@ -16,7 +16,8 @@ object Util {
     // TODO: なぜか上下逆さまなのでyを反転
     val points = Source.fromFile(fileName).getLines.
       filter((l) => regex1.findFirstIn(l).nonEmpty).
-      map { case regex1(x, y, z) => Point3(x.toDouble, y.toDouble * -1, z.toDouble) }.
+//      map { case regex1(x, y, z) => Point3(x.toDouble, y.toDouble * -1, z.toDouble) }.
+      map { case regex1(x, y, z) => Point3(x.toDouble, y.toDouble, z.toDouble) }.
       toArray
     // ポリゴンのデータ
     val regex2 = """^f +([0-9]+)//?[0-9]+ +([0-9]+)//?[0-9]+ +([0-9]+)//?[0-9]+ +([0-9]+)//?[0-9]+ *""".r
