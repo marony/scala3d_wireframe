@@ -15,7 +15,7 @@ case class World(polygons : Array[(Polygon3, Color)]) {
   val WIDTH = 640
   val HEIGHT = 480
   // TODO: 読み込みの際にモデルの大きさを合わせる
-  val SCALE = 15
+  val SCALE = 20
 //  val SCALE = 3000
 //  val SCALE = 4000
 
