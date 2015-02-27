@@ -15,16 +15,16 @@ case class World(polygons : Array[(Polygon3, Color)]) {
   val WIDTH = 640
   val HEIGHT = 480
   // TODO: 読み込みの際にモデルの大きさを合わせる
-  val SCALE = 20
-//  val SCALE = 3000
-//  val SCALE = 4000
+  val SCALE = 2000
+//  val SCALE = 30000
+//  val SCALE = 80000
 
   // スクリーン(画面)
   val screen = Screen(Size(WIDTH, HEIGHT), SCALE)
   // カメラ
-  val camera = Camera(Point3(-0, -0, -50), Vector3(0, 0, 0), Vector3(0, 1, 0), -1.0, 100.0)
-//  val camera = Camera(Point3(-2, 2, -5), Vector3(2, -3, 0), Vector3(0, 1, 0), 1.0, 100.0)
-//  val camera = Camera(Point3(0, 0, -5), Vector3(0, 0, 0), Vector3(0, 1, 0))
+  val camera = Camera(Point3(0, 0, -100), Vector3(0, 0, 0), Vector3(0, 1, 0), 10, 200)
+//  val camera = Camera(Point3(-2, 2, -5), Vector3(2, -3, 0), Vector3(0, 1, 0), 10.0, 100.0)
+//  val camera = Camera(Point3(0, 0, -2), Vector3(0, 0, 0), Vector3(0, 1, 0), 0.5, 2.0)
   // 光源
   val light = Light(Point3(-500, 500, -500))
 
@@ -34,19 +34,25 @@ case class World(polygons : Array[(Polygon3, Color)]) {
     // ポリゴン群を投影面の座標に変換
     rotate = rotate % 360
     polygons.
-      map { case (p, c) => (p.rotateX(20d / 360 * 2 * Pi).
+      map { case (p, c) => (p.rotateX(30d / 360 * 2 * Pi).
         // 回転
         rotateY(rotate.asInstanceOf[Double] / 360 * 2 * Pi), c) }.
       // 拡散光の計算
       map { case (p, c) => (p, light.getDiffuseColor(c, p)) }.
-      // ビューポート変換
-      map { case (p, c) => (camera.convertToView(p), c)}.
       // カリング(カメラから見て裏面のポリゴンは省略)
-      filter((pc) => !camera.isCull(pc._1)).
+      filter { case (p, c) => !camera.isCull(p) }.
+      // ビューポート変換
+      map { case (p, c) => /*println("convertToView:" + p);*/ (camera.convertToView(p), c)}.
       // 奥からソート
       sortBy((pc) => -1.0 * (pc._1.p1.z + pc._1.p2.z + pc._1.p3.z)).
       // 射影変換
-      map { case (p, c) => (camera.projection(p, screen), c)}.
+      map { case (p, c) => /*println("projection:" + p);*/ (camera.projection(p, screen), c)}.
+      // 遠近感
+      filter { case (p, c) =>
+        p.p1.z >= camera.near && p.p1.z <= camera.far &&
+        p.p2.z >= camera.near && p.p2.z <= camera.far &&
+        p.p3.z >= camera.near && p.p3.z <= camera.far}.
+      map { case (p, c) => /*println("perspective:" + p);*/ (camera.perspective(p), c)}.
       // スクリーン変換
       map { case (p, c) => (screen.convertToScreen(p), c)}.
       // 描画

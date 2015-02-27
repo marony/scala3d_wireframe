@@ -10,11 +10,11 @@ import scala.math.sqrt
 
 object Vector3 {
   implicit def vector3ToPoint3(vector : Vector3) : Point3 = {
-    Point3(vector.x, vector.y, vector.z)
+    Point3(vector.x, vector.y, vector.z, vector.w)
   }
 }
 
-case class Vector3(x : Double, y : Double, z : Double) {
+case class Vector3(x : Double, y : Double, z : Double, w : Double = 1.0) {
   // ベクトルの大きさを取得
   def length = {
     sqrt(x * x + y * y + z * z)
@@ -33,11 +33,11 @@ case class Vector3(x : Double, y : Double, z : Double) {
   }
   // 乗算
   def *(a : Double) = {
-    Vector3(x * a, y * a, z * z)
+    Vector3(x * a, y * a, z * a)
   }
   // 除算
   def /(a : Double) = {
-    Vector3(x / a, y / a, z / z)
+    Vector3(x / a, y / a, z / a)
   }
   // 内積
   def <*>(vector : Vector3) : Double = {

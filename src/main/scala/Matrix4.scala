@@ -33,9 +33,10 @@ case class Matrix4(elements : Double*) {
   // 積
   def *(vector : Vector3) = {
     Vector3(
-      elements(0) * vector.x + elements(1) * vector.y + elements(2) * vector.z + elements(3) * 1,
-      elements(4) * vector.x + elements(5) * vector.y + elements(6) * vector.z + elements(7) * 1,
-      elements(8) * vector.x + elements(9) * vector.y + elements(10) * vector.z + elements(11) * 1
+      elements(0) * vector.x + elements(1) * vector.y + elements(2) * vector.z + elements(3) * vector.w,
+      elements(4) * vector.x + elements(5) * vector.y + elements(6) * vector.z + elements(7) * vector.w,
+      elements(8) * vector.x + elements(9) * vector.y + elements(10) * vector.z + elements(11) * vector.w,
+      elements(12) * vector.x + elements(13) * vector.y + elements(14) * vector.z + elements(15) * vector.w
     )
   }
   // 積

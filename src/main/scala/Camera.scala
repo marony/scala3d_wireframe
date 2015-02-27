@@ -15,10 +15,14 @@ case class Camera(position : Point3, lookAt : Point3, up : Vector3, near : Doubl
     val z = direction.normalize
     val x = (up * z).normalize
     val y = (z * x).normalize
+    val tx = position <*> x * -1
+    val ty = position <*> y * -1
+    val tz = position <*> z * -1
+//    println("direction:" + direction + ", x:" + x + ", y:" + y + ", z:" + z + ", tx:" + tx + ", ty:" + ty + ", tz:" + tz)
     val matrix = Matrix4(
-      x.x, x.y, x.z, position <*> x * -1,
-      y.x, y.y, y.z, position <*> y * -1,
-      z.x, z.y, z.z, position <*> z * -1,
+      x.x, x.y, x.z, tx,
+      y.x, y.y, y.z, ty,
+      z.x, z.y, z.z, tz,
       0, 0, 0, 1
     )
     polygon.affin(matrix)
@@ -27,9 +31,10 @@ case class Camera(position : Point3, lookAt : Point3, up : Vector3, near : Doubl
   // 投影変換
   def projection(point : Point3, screen : Screen) : Point3 = {
     Point3(
-      direction.length * 2 * point.x / screen.size.width,
-      direction.length * 2 * point.y / screen.size.height,
-      -1 * (far + near) * point.z / (far - near) - (2 * near * far) / (far - near)
+      near * 2 * point.x / screen.size.width,
+      near * 2 * point.y / screen.size.height,
+      (far + near) * point.z / (far - near) + (2 * near * far) / (far - near),
+      (2 * near * far) * point.w / (far - near)
     )
   }
 
@@ -40,5 +45,9 @@ case class Camera(position : Point3, lookAt : Point3, up : Vector3, near : Doubl
       projection(polygon.p2, screen),
       projection(polygon.p3, screen)
     )
+  }
+
+  def perspective(polygon : Polygon3) : Polygon3 = {
+    Polygon3(polygon.p1 / polygon.p1.w, polygon.p2 / polygon.p2.w, polygon.p3 / polygon.p3.w)
   }
 }
