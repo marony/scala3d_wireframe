@@ -15,15 +15,15 @@ case class World(polygons : Array[(Polygon3, Color)]) {
   val WIDTH = 640
   val HEIGHT = 480
   // TODO: 読み込みの際にモデルの大きさを合わせる
-//  val SCALE = 15
-  val SCALE = 3000
+  val SCALE = 15
+//  val SCALE = 3000
 //  val SCALE = 4000
 
   // スクリーン(画面)
   val screen = Screen(Size(WIDTH, HEIGHT), SCALE)
   // カメラ
-//  val camera = Camera(Point3(-30, -10, -30), Vector3(0, 0, 0), Vector3(0, 1, 0))
-  val camera = Camera(Point3(0, 0, -5), Vector3(0, 0, 0), Vector3(0, 1, 0), 1.0, 100.0)
+  val camera = Camera(Point3(-0, -0, -50), Vector3(0, 0, 0), Vector3(0, 1, 0), -1.0, 100.0)
+//  val camera = Camera(Point3(-2, 2, -5), Vector3(2, -3, 0), Vector3(0, 1, 0), 1.0, 100.0)
 //  val camera = Camera(Point3(0, 0, -5), Vector3(0, 0, 0), Vector3(0, 1, 0))
   // 光源
   val light = Light(Point3(-500, 500, -500))

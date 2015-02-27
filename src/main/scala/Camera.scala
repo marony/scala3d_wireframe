@@ -6,15 +6,13 @@
  * To change this template use File | Settings | File Templates.
  */
 case class Camera(position : Point3, lookAt : Point3, up : Vector3, near : Double, far : Double) {
-  // 視点を(xv, yv, zv) = (0, 0, 0)とした左手座標系
-
   def direction : Vector3 = lookAt - position
 
   def isCull(polygon : Polygon3) : Boolean = polygon.normal <*> direction >= 0
 
   // ビューポート変換
   def convertToView(polygon : Polygon3) : Polygon3 = {
-    val z = direction.normalize * -1
+    val z = direction.normalize
     val x = (up * z).normalize
     val y = (z * x).normalize
     val matrix = Matrix4(

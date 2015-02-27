@@ -39,15 +39,15 @@ object Util {
     }.toArray
     // 中央に寄せる
     val aveP = Point3(
-      polygons.foldLeft(0.0)((acc, p) => acc + p.p1.x + p.p2.x + p.p3.x) / polygons.length,
-      polygons.foldLeft(0.0)((acc, p) => acc + p.p1.y + p.p2.y + p.p3.y) / polygons.length,
-      polygons.foldLeft(0.0)((acc, p) => acc + p.p1.z + p.p2.z + p.p3.z) / polygons.length)
+      polygons.foldLeft(0.0)((acc, p) => acc + (p.p1.x + p.p2.x + p.p3.x) / 3.0) / polygons.length,
+      polygons.foldLeft(0.0)((acc, p) => acc + (p.p1.y + p.p2.y + p.p3.y) / 3.0) / polygons.length,
+      polygons.foldLeft(0.0)((acc, p) => acc + (p.p1.z + p.p2.z + p.p3.z) / 3.0) / polygons.length)
     // TODO: 大きさを合わせる
     // x < 0 and y < 0 -> 水色
     // x >= 0 and y < 0 -> 紫
     // x < 0 and y >= 0 -> 赤
     // x >= 0 and y >= 0 -> 青
-    polygons.map((p) => p.move((Vector3(0, 0, 0) - aveP) / 2.0)).
+    polygons.map((p) => p.move(Vector3(0, 0, 0) - aveP)).
              map((p) => (p,
                          if (p.p1.x < 0 && p.p1.y < 0) new Color(0, 255, 255)
                          else if (p.p1.x >= 0 && p.p1.y < 0) new Color(255, 0, 255)
