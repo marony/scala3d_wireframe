@@ -11,20 +11,24 @@ import scala.math.{Pi}
 
 case class World(polygons : Array[(Polygon3, Color)]) {
   var rotate : Int = 0
+//  val R = 30d
+  val R = 0d
 
   val WIDTH = 640
   val HEIGHT = 480
   // TODO: 読み込みの際にモデルの大きさを合わせる
-  val SCALE = 2000
+//  val SCALE = 2000
 //  val SCALE = 30000
 //  val SCALE = 80000
-
+  val SCALE = 50000
   // スクリーン(画面)
   val screen = Screen(Size(WIDTH, HEIGHT), SCALE)
   // カメラ
-  val camera = Camera(Point3(0, 0, -100), Vector3(0, 0, 0), Vector3(0, 1, 0), 10, 200)
+//  val camera = Camera(Point3(20, 50, -100), Vector3(0, 0, 0), Vector3(0, 1, 0), 10, 300)
 //  val camera = Camera(Point3(-2, 2, -5), Vector3(2, -3, 0), Vector3(0, 1, 0), 10.0, 100.0)
 //  val camera = Camera(Point3(0, 0, -2), Vector3(0, 0, 0), Vector3(0, 1, 0), 0.5, 2.0)
+//  val camera = Camera(Point3(0, 0, -100), Vector3(0, 0, 0), Vector3(0, 1, 0), 10, 300)
+  val camera = Camera(Point3(0, -1, -100), Vector3(0, -1, 0), Vector3(0, 1, 0), 10, 300)
   // 光源
   val light = Light(Point3(-500, 500, -500))
 
@@ -34,7 +38,7 @@ case class World(polygons : Array[(Polygon3, Color)]) {
     // ポリゴン群を投影面の座標に変換
     rotate = rotate % 360
     polygons.
-      map { case (p, c) => (p.rotateX(30d / 360 * 2 * Pi).
+      map { case (p, c) => (p.rotateX(R / 360 * 2 * Pi).
         // 回転
         rotateY(rotate.asInstanceOf[Double] / 360 * 2 * Pi), c) }.
       // 拡散光の計算

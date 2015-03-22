@@ -2,7 +2,7 @@
 
 　ScalaでSwingと3Dのロジックのテストです。
 
-![動画](/resources/Video_2015-02-27_173026.gif)
+![動画](/resources/Video_2015-03-20_031253.gif)
 
 ![静止画](/resources/2015-02-01_095951.png)
 

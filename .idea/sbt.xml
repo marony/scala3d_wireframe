@@ -9,8 +9,8 @@
         <option name="jdk" value="1.8" />
         <option name="modules">
           <set>
-            <option value="$USER_HOME$/Dropbox/projects/_home/Scala/scala3d_wireframe" />
-            <option value="$USER_HOME$/Dropbox/projects/_home/Scala/scala3d_wireframe/project" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/project" />
           </set>
         </option>
         <option name="resolveClassifiers" value="true" />

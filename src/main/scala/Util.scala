@@ -45,11 +45,13 @@ object Util {
     // x >= 0 and y < 0 -> 紫
     // x < 0 and y >= 0 -> 赤
     // x >= 0 and y >= 0 -> 青
+//    polygons.map((p) => p.move(Vector3(0, 0, 0) - aveP)).
+//             map((p) => (p,
+//                         if (p.p1.x < 0 && p.p1.y < 0) new Color(0, 255, 255)
+//                         else if (p.p1.x >= 0 && p.p1.y < 0) new Color(255, 0, 255)
+//                         else if (p.p1.x < 0) new Color(255, 0, 0)
+//                         else new Color(0, 0, 255)))
     polygons.map((p) => p.move(Vector3(0, 0, 0) - aveP)).
-             map((p) => (p,
-                         if (p.p1.x < 0 && p.p1.y < 0) new Color(0, 255, 255)
-                         else if (p.p1.x >= 0 && p.p1.y < 0) new Color(255, 0, 255)
-                         else if (p.p1.x < 0) new Color(255, 0, 0)
-                         else new Color(0, 0, 255)))
+      map((p) => (p, new Color(255, 230, 230)))
   }
 }
