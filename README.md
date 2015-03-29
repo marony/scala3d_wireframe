@@ -2,6 +2,8 @@
 
 　ScalaでSwingと3Dのロジックのテストです。
 
+[C++版](https://github.com/marony/cpp3d)も作りました。
+
 ![動画](/resources/Video_2015-03-20_031253.gif)
 
 ![静止画](/resources/2015-02-01_095951.png)
