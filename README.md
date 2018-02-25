@@ -3,6 +3,7 @@
 　ScalaでSwingと3Dのロジックのテストです。
 
 [C++版](https://github.com/marony/cpp3d)も作りました。
+[Rust版](https://github.com/marony/rust3d)も作りました。
 
 ![動画](/resources/Video_2015-03-20_031253.gif)
 
